@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Eduweb Player Offline</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/flowplayer/skin/minimalist.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+        <link rel="stylesheet" href="fonts/roboto/roboto.css">
+        <link rel="stylesheet" href="fonts/dosis/dosis.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/flowplayer-custom.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+
+        <div id="main-container">
+            <div class="browser-testing">
+                <div class="preloader">
+                    <ul class="spinner">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+
+                <div class="text">Sprawdzam przeglądarkę...</div>
+            </div>
+        </div>
+        
+        <div id="offline-modal" class="player-offline mfp-hide">
+            <div class="info-page">
+                <h1>Witaj w Playerze eduweb!</h1>
+                <p class="smaller">Wygodnie korzystaj z kursów na każdym urządzeniu</p>
+
+                <div class="offline">Z Playera możesz korzystać w trybie OFFLINE, a jeśli masz dostęp do dobrego łącza, możesz przejść w tryb ONLINE.</div>
+                <div class="widgets">W panelu ikon znajdziesz najważniejsze opcje, w tym listę lekcji. Jeśli masz wyższą rozdzielczość (>1366), możesz zadokować panel tak aby był przyklejony do prawej strony. (online i offline)</div>
+                <div class="notes">Do każdej lekcji możesz dodawać własne Notatki, które zostaną przypisane do Twojego konta. (tylko online)</div>
+                <div class="comments">Każda lekcja posiada komentarze, dzięki którym możesz wymieniać opinie z innymi użytkownikami. (tylko online)</div>
+                <div class="favorites">Dodawanie lekcji do ulubionych pomoże oznaczyć lekcje, do których łatwo wrócisz później. (tylko online)</div>
+            </div>
+
+            <div class="login">
+
+                <div class="top tiles-pattern">
+                    <h1>Możesz przejść do trybu Online</h1>
+                    <p class="smaller">Aby odblokować komentarze i notatki.</p>
+                </div>
+
+<p class="info">Tryb Online poza rozszerzeniem funkcjonalości playera pozwoli np. zdobywać punkty za oglądanie kursów. Jeśli jednak chcesz oszczędzić transfer lub nie dysponujesz szybkim łączem, możesz pozostać w trybie Offline.</a></p>
+
+                <div class="przyciski">
+                	<a class="button online-btn js--close-popup">POZOSTAŃ W WERSJI OFFLINE</a>
+                    <a class="button offline-btn js--course-url">PRZEJDŹ DO WERSJI ONLINE</a>
+                </div>
+                
+                <div class="tutorial">
+                    <a href="http://eduweb.pl/faq/#film-ogladanie-kursow" target="_blank">
+                        <img src="img/tutorial.jpg" alt=""/>
+                        Zobacz jak działa Player Online
+                    </a>
+
+                    <a href="http://eduweb.pl/faq/#film-aplikacja-na-ipada">
+                        <img src="img/tutorial2.jpg" alt=""/>
+                        Oglądaj też w aplikacjach
+                    </a>
+                </div>
+
+                <p class="info" style="float:left">Jeśli masz jakiekolwiek problemy z działaniem Playera lub logowaniem <a href="http://www.eduweb.pl/kontakt/">skontaktuj się z nami.</a></p>
+            </div>
+        </div> <!-- .player-offline -->
+        
+        <script type="text/html" id="error-details-tmpl">
+            <div class="error-details"><%= error %></div>
+        </script>
+
+        <script type="text/html" id="course-playlist-item-tmpl">
+        </script>
+
+        <script type="text/html" id="player-tmpl">
+            <header id="header">
+                <div class="center-wrapper">
+
+                    <h1><a href="http://www.eduweb.pl" style="font-family: Dosis;">eduweb.pl</a></h1>
+
+                    <a class="go-online js--course-url" href="#">
+                        <span>Przejdź do trybu online</span>
+                    </a>
+                    
+                    <div class="clearfix"></div>
+                    
+                    <div class="player-title">
+
+                        <a class="change-movie prev" href="#">
+                            <span class="title"></span>
+                        </a>
+                            
+                        <a class="change-movie next" href="#">
+                            <span class="title"></span>
+                        </a>
+
+                        <h1 class="lesson-title"></h1>
+                        
+                        <div id="widgets">
+
+                            <div class="widget dock">
+                                <div class="icon"></div>
+                            </div>
+
+                            <div class="widget source-files">
+                                <div class="icon"></div>
+                                <div class="content">
+                                    <a class="btn btn-big" href="#" target="_blank">PLIKI ŻRÓDŁOWE DO KURSU</a>
+                                </div>
+                            </div>
+
+                            <div class="widget courses-list">
+                                <div class="icon"></div>
+                                <div class="content" style="">
+                                    <div class="wrapper course">
+                                        <h5 class="course-title"></h5>
+                                        <div class="viewport">
+                                            <ul></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="clearfix"></div>                    
+                    </div>
+                </div>
+                
+                <div id="video-player">
+                    <div class="viewport js-video-player" data-maxWidth="" data-aspectRatio="">
+                        
+                        <a class="change-movie prev" href="#">
+                            <span class="arrow"></span>
+                            <span class="inner-wrapper">
+                                <span class="title"></span>
+                            </span>
+                        </a>
+                        <a class="change-movie next" href="#">
+                            <span class="arrow"></span>
+                            <span class="inner-wrapper">
+                                <span class="title"></span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+            </header>
+            
+            <div id="video-details">
+                <div class="center-wrapper">
+                    <div>
+                        <h2 class="lesson-title"></h2>
+                        <div class="lesson-description"></div>
+                        <div class="course-playlist"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="scroll-to-top scroller-btn">
+                Przewiń do góry strony
+            </div>
+        </script>
+
+
+        <script src="http://google-analytics.com/ga.js"></script>
+
+        <script src="js/vendor/jquery-1.9.1.min.js"></script>
+        <script src="js/vendor/underscore-min.js"></script>
+        <script src="js/vendor/jquery.magnific-popup.min.js"></script>
+        <script src="js/vendor/response.min.js"></script>
+        <script src="js/vendor/jquery.mCustomScrollbar.js"></script>
+        <script src="js/vendor/flowplayer/flowplayer.js"></script>
+        <script src="js/vendor/store.min.js"></script>
+        <script src="js/vendor/jquery.scrollTo.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/BrowserTest.js"></script>
+
+        <script src="js/module/courseModule.js"></script>
+        <script src="js/module/courseManagerModule.js"></script>
+
+        <script src="js/module/playerDockModule.js"></script>
+        <script src="js/module/playerWidgetsModule.js"></script>
+        <script src="js/module/playerResizerModule.js"></script>
+        <script src="js/module/playerAffixModule.js"></script>
+        <script src="js/module/playerModule.js"></script>
+
+        <script src="js/module/errorHandlerModule.js"></script>
+        <script src="js/module/appModule.js"></script>
+
+        <script src="js/main.js"></script>        
+    </body>
+</html>
