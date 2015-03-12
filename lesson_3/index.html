@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl" ng-app="todoAPP">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>TODO</title>
+        <style>
+			body{font-family:calibri;}
+			.msg-true {color:silver;text-decoration:line-through;font-size:15px;}
+			i {color:red;font-size:20px;}
+        </style>
+
+    </head>
+    <body>
+
+		<div ng-controller="todoCTRL">
+			<h2>Todo</h2>
+			<strong>Ilość wszytskich todosów do zrobienia: <i>{{ todos.length }}</i> <br>Do końca zostało: <i>{{count()}}</i></strong>
+			<form name="myForm" ng-submit="addTodo()">
+				<p>
+					Dodaj todosa: 
+					<input type="text" ng-model="textTodosaModel" />
+					<input type="submit" value="Dodaj TODO" />
+					
+				</p>
+				{{ textTodosaModel }}
+			</form>
+			
+			<ol>
+				<li ng-repeat="todo in todos">
+					<input type="checkbox" ng-model="todo.done" />
+					<span class="msg-{{todo.done}}">{{ todo.text }}</span>
+				</li>
+			</ol>
+			<button ng-click="removeTodo()">Dodaj do archiwum czyli usuń</button>
+		</div>
+	
+		
+		
+		<script src="jquery.js"></script>
+        <script src="angular.min.js"></script>
+		<script>
+			var app = angular.module('todoAPP', []);
+			
+			app.controller('todoCTRL', ['$scope', function($scope){
+				$scope.todos = [
+					{text: 'ddddddddddddddddddd', done: false},
+					{text: 'xxxxxxxxxxxxxxxxxxx', done: true}
+				]; 
+				
+				$scope.addTodo = function() {
+					$scope.todos.push({text: $scope.textTodosaModel, done: false});
+					$scope.textTodosaModel = '';
+				}
+				
+				$scope.removeTodo = function() {
+					var oldTodos = $scope.todos;
+					$scope.todos = [];
+					angular.forEach(oldTodos, function(todo){
+						if (!todo.done) $scope.todos.push(todo);
+					})
+				}
+				
+				$scope.count = function() {
+					//sprawdzić ile jest nie zaznaczonych(mających false) i podać jako cyfre
+					var counter = 0;
+					angular.forEach($scope.todos, function(todo){
+						counter += !todo.done ? 1 : 0;  //jeśli false to +1 do licznika a jeśli true to 0
+					})
+					return counter;
+				}
+				
+			}])
+		</script>
+	   	
+    </body>
+</html>
